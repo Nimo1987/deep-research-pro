@@ -1,0 +1,127 @@
+{
+  "version": "1.0",
+  "description": "akshare 数据路由表 — A股/美股/港股常见调研场景",
+  "markets": {
+    "A股": {
+      "keywords": ["A股", "沪深", "上证", "深证", "创业板", "科创板", "主板", "A-share", "sh6", "sz0", "sz3"],
+      "scenarios": {
+        "个股行情": {
+          "api": "stock_zh_a_hist",
+          "params": {"symbol": "{SYMBOL}", "period": "daily", "start_date": "{START}", "end_date": "{END}", "adjust": "qfq"},
+          "description": "A股个股历史行情（前复权）"
+        },
+        "个股基本信息": {
+          "api": "stock_individual_info_em",
+          "params": {"stock": "{SYMBOL}"},
+          "description": "总市值、流通市值、行业、上市日期等"
+        },
+        "财务指标": {
+          "api": "stock_financial_analysis_indicator",
+          "params": {"stock": "{SYMBOL}", "start_year": "{YEAR}"},
+          "description": "ROE、净利润、营收、毛利率等核心财务指标"
+        },
+        "行业板块行情": {
+          "api": "stock_board_industry_hist_em",
+          "params": {"symbol": "{INDUSTRY}", "period": "daily", "start_date": "{START}", "end_date": "{END}", "adjust": ""},
+          "description": "行业板块历史涨跌"
+        },
+        "宏观-CPI": {
+          "api": "macro_china_cpi_yearly",
+          "params": {},
+          "description": "中国CPI年度数据"
+        },
+        "宏观-GDP": {
+          "api": "macro_china_gdp_yearly",
+          "params": {},
+          "description": "中国GDP年度数据"
+        },
+        "宏观-PMI": {
+          "api": "macro_china_pmi_yearly",
+          "params": {},
+          "description": "中国PMI制造业指数"
+        },
+        "宏观-社融": {
+          "api": "macro_china_shrzgm",
+          "params": {},
+          "description": "中国社会融资规模"
+        },
+        "市场概览": {
+          "api": "stock_zh_a_spot_em",
+          "params": {},
+          "description": "A股全市场实时行情快照（含PE、PB、涨跌幅）"
+        },
+        "大盘指数": {
+          "api": "stock_zh_index_daily",
+          "params": {"symbol": "{INDEX}", "start_date": "{START}", "end_date": "{END}"},
+          "description": "上证/深证/沪深300等指数历史行情，symbol示例: sh000001"
+        }
+      }
+    },
+    "美股": {
+      "keywords": ["美股", "纳斯达克", "纽交所", "NYSE", "NASDAQ", "S&P", "标普", "道琼斯", "US stock", "AAPL", "TSLA", "NVDA"],
+      "scenarios": {
+        "个股行情": {
+          "api": "stock_us_hist",
+          "params": {"symbol": "{SYMBOL}", "period": "daily", "start_date": "{START}", "end_date": "{END}", "adjust": "qfq"},
+          "description": "美股个股历史行情，symbol示例: AAPL"
+        },
+        "个股基本信息": {
+          "api": "stock_us_fundamental_sina",
+          "params": {"stock": "{SYMBOL}"},
+          "description": "美股基本面（市值、PE、EPS等）"
+        },
+        "财务报表": {
+          "api": "stock_us_financial_report",
+          "params": {"stock": "{SYMBOL}", "report_type": "income"},
+          "description": "美股财务报表，report_type: income/balance/cash"
+        },
+        "大盘指数": {
+          "api": "index_us_stock_sina",
+          "params": {"symbol": "{INDEX}"},
+          "description": "美股指数历史行情，symbol示例: .INX(标普500) .IXIC(纳指) .DJI(道指)"
+        },
+        "宏观-美联储利率": {
+          "api": "macro_bank_usa_interest_rate",
+          "params": {},
+          "description": "美联储基准利率历史数据"
+        },
+        "宏观-美国CPI": {
+          "api": "macro_usa_cpi_monthly",
+          "params": {},
+          "description": "美国CPI月度数据"
+        },
+        "宏观-非农就业": {
+          "api": "macro_usa_non_farm",
+          "params": {},
+          "description": "美国非农就业人口数据"
+        }
+      }
+    },
+    "港股": {
+      "keywords": ["港股", "香港", "恒生", "恒指", "H股", "红筹", "HK", "HKEX", "HKD"],
+      "scenarios": {
+        "个股行情": {
+          "api": "stock_hk_hist",
+          "params": {"symbol": "{SYMBOL}", "period": "daily", "start_date": "{START}", "end_date": "{END}", "adjust": "qfq"},
+          "description": "港股个股历史行情，symbol示例: 00700(腾讯)"
+        },
+        "个股基本信息": {
+          "api": "stock_hk_spot_em",
+          "params": {},
+          "description": "港股全市场实时行情快照"
+        },
+        "恒生指数": {
+          "api": "stock_hk_index_daily_sina",
+          "params": {"symbol": "HSI", "start_date": "{START}", "end_date": "{END}"},
+          "description": "恒生指数历史行情"
+        },
+        "港股财务": {
+          "api": "stock_hk_financial_report_em",
+          "params": {"stock": "{SYMBOL}", "indicator": "利润表"},
+          "description": "港股财务报告，indicator: 利润表/资产负债表/现金流量表"
+        }
+      }
+    }
+  },
+  "fallback_note": "如果 topic 无法匹配任何市场关键词，跳过金融数据拉取步骤。"
+}

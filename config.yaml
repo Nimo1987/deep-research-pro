@@ -1,0 +1,80 @@
+# Deep Research Pro v4 — 全局配置
+
+search:
+  layers:
+    - name: background
+      description: "背景层：建立基础认知"
+    - name: authority
+      description: "权威层：获取权威信源"
+    - name: timeliness
+      description: "时效层：获取最新动态"
+    - name: academic
+      description: "学术层：获取学术/研究信源"
+  max_retries: 2                  # 搜索阶段最大重试次数
+
+source_weights:
+  1:
+    label: "一级权威"
+    weight: 1.0
+    description: "政府机构、顶级学术期刊、国际标准组织"
+  2:
+    label: "二级专业"
+    weight: 0.8
+    description: "顶级咨询公司、行业分析机构、专业媒体"
+  3:
+    label: "三级新闻"
+    weight: 0.6
+    description: "主流新闻媒体、知名科技媒体"
+  4:
+    label: "四级一般"
+    weight: 0.4
+    description: "一般网站、企业官网、行业博客"
+  5:
+    label: "五级社交"
+    weight: 0.15
+    description: "社交媒体、论坛、自媒体、微信公众号"
+
+evaluation:
+  craap_threshold: 5.5            # 降低到 5.5，避免过度过滤
+  max_sources_to_evaluate: 30
+  craap_weights:
+    currency: 0.2
+    relevance: 0.2
+    authority: 0.2
+    accuracy: 0.2
+    purpose: 0.2
+
+quality_gates:
+  sources:
+    min_total_sources: 10         # 从 15 降到 10
+    min_tier1_sources: 1          # 从 2 降到 1（很多主题确实没有 .gov/.edu 信源）
+    min_tier2_sources: 2          # 从 3 降到 2
+    min_avg_craap: 5.5            # 从 6.5 降到 5.5
+    min_verified_points: 2        # 从 3 降到 2
+    # 以下为 FAIL 的硬底线（低于此值即使重试也不降级）
+    hard_min_total_sources: 5
+    hard_min_avg_craap: 4.0
+    adaptive_threshold: true        # 信源稀少时自动降低阈值
+    adaptive_reduction: 0.3         # 降低幅度：阈值 × (1 - 0.3) = 阈值 × 0.7
+  report:
+    min_char_count: 3000
+    hard_min_char_count: 500      # 硬底线
+    required_sections:
+      - "执行摘要"
+      - "研究方法"
+      - "局限"
+      - "参考文献"
+    must_have_tables: true
+    no_markdown_tables: true
+
+rendering:
+  pdf:
+    page_size: "A4"
+    margin: "25mm"
+  docx:
+    default_font: "Arial"
+    default_font_cjk: "微软雅黑"
+    font_size: 11
+    line_spacing: 1.6
+    heading_color: "1a365d"
+    accent_color: "2b6cb0"

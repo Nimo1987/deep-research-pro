@@ -1,0 +1,81 @@
+{
+  "version": "2.0",
+  "description": "tushare 数据路由表 — A股/美股/港股常见调研场景",
+  "markets": {
+    "A股": {
+      "keywords": ["A股", "沪深", "上证", "深证", "创业板", "科创板", "主板", "A-share", "sh6", "sz0", "sz3", "中国股市"],
+      "scenarios": {
+        "个股行情": {
+          "api": "daily",
+          "params": {"ts_code": "{SYMBOL}", "start_date": "{START}", "end_date": "{END}"},
+          "description": "A股个股历史日线行情（含涨跌幅、成交量）"
+        },
+        "每日指标": {
+          "api": "daily_basic",
+          "params": {"ts_code": "{SYMBOL}", "start_date": "{START}", "end_date": "{END}", "fields": "trade_date,ts_code,close,pe,pe_ttm,pb,ps_ttm,dv_ratio,total_mv,circ_mv"},
+          "description": "PE、PB、市值、股息率等每日估值指标"
+        },
+        "财务利润表": {
+          "api": "income",
+          "params": {"ts_code": "{SYMBOL}", "start_date": "{START}", "end_date": "{END}", "fields": "ann_date,end_date,revenue,operate_profit,n_income,basic_eps"},
+          "description": "营收、营业利润、净利润、EPS"
+        },
+        "资产负债表": {
+          "api": "balancesheet",
+          "params": {"ts_code": "{SYMBOL}", "start_date": "{START}", "end_date": "{END}", "fields": "ann_date,end_date,total_assets,total_liab,total_hldr_eqy_exc_min_int"},
+          "description": "总资产、总负债、股东权益"
+        },
+        "现金流量表": {
+          "api": "cashflow",
+          "params": {"ts_code": "{SYMBOL}", "start_date": "{START}", "end_date": "{END}", "fields": "ann_date,end_date,net_operate_cash_flow,n_cashflow_act"},
+          "description": "经营活动现金流"
+        },
+        "大盘指数": {
+          "api": "index_daily",
+          "params": {"ts_code": "{INDEX}", "start_date": "{START}", "end_date": "{END}"},
+          "description": "上证/深证/沪深300等指数历史行情，INDEX示例: 000001.SH"
+        }
+      }
+    },
+    "港股": {
+      "keywords": ["港股", "香港", "HK", "恒生", "腾讯", "阿里", "美团", "小米", "港交所"],
+      "scenarios": {
+        "个股行情": {
+          "api": "hk_daily",
+          "params": {"ts_code": "{SYMBOL}", "start_date": "{START}", "end_date": "{END}"},
+          "description": "港股个股历史日线行情"
+        },
+        "港股财务指标": {
+          "api": "hk_basic",
+          "params": {"ts_code": "{SYMBOL}"},
+          "description": "港股基础信息"
+        },
+        "港股利润表": {
+          "api": "hk_income",
+          "params": {"ts_code": "{SYMBOL}", "start_date": "{START}", "end_date": "{END}"},
+          "description": "港股营收、净利润等财务数据"
+        }
+      }
+    },
+    "美股": {
+      "keywords": ["美股", "纳斯达克", "纽交所", "NYSE", "NASDAQ", "标普", "S&P", "苹果", "微软", "谷歌", "特斯拉", "英伟达"],
+      "scenarios": {
+        "个股行情": {
+          "api": "us_daily",
+          "params": {"ts_code": "{SYMBOL}", "start_date": "{START}", "end_date": "{END}"},
+          "description": "美股个股历史日线行情（含PE、PB估值）"
+        },
+        "美股财务指标": {
+          "api": "us_basic",
+          "params": {"ts_code": "{SYMBOL}"},
+          "description": "美股基础信息"
+        },
+        "美股利润表": {
+          "api": "us_income",
+          "params": {"ts_code": "{SYMBOL}", "start_date": "{START}", "end_date": "{END}"},
+          "description": "美股营收、净利润等财务数据"
+        }
+      }
+    }
+  }
+}

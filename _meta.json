@@ -1,0 +1,9 @@
+{
+  "schema_version": "v1",
+  "name": "deep-research-pro",
+  "version": "4.3.0",
+  "description": "代码驱动的深度调研引擎，CRAAP信源评估+交叉信源加权+时效过滤，脚本只做纯计算",
+  "author": "Jiaqi",
+  "tags": ["research", "analysis", "report"],
+  "required_tools": ["search", "shell", "file"]
+}

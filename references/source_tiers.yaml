@@ -1,0 +1,542 @@
+# 信源域名分级数据库
+# tier 1 = 最权威, tier 5 = 最低可信度
+# 匹配规则：域名或完整 URL 包含以下关键词即归入对应层级
+# 按顺序匹配 tier_1 → tier_2 → tier_3 → tier_5，首次命中即停止
+# 未命中任何规则的域名默认归入 tier_4（一般信源）
+
+# ===========================================================================
+# TIER 1 — 权威信源（weight: 1.0）
+# 政府机构、国际组织、学术期刊、标准组织、上市公司监管披露
+# ===========================================================================
+tier_1_authority:
+
+  # ─── 国际组织 ───
+  - "who.int"                  # 世界卫生组织
+  - "worldbank.org"            # 世界银行
+  - "imf.org"                  # 国际货币基金组织
+  - "un.org"                   # 联合国
+  - "oecd.org"                 # 经合组织
+  - "wto.org"                  # 世界贸易组织
+  - "iea.org"                  # 国际能源署
+  - "fao.org"                  # 联合国粮农组织
+  - "ilo.org"                  # 国际劳工组织
+  - "bis.org"                  # 国际清算银行
+  - "adb.org"                  # 亚洲开发银行
+  - "aiib.org"                 # 亚投行
+  - "ecb.europa.eu"            # 欧洲央行
+  - "europa.eu"                # 欧盟
+
+  # ─── 中国政府 ───
+  - ".gov.cn"                  # 中国政府通用
+  - "stats.gov.cn"             # 国家统计局
+  - "mofcom.gov.cn"            # 商务部
+  - "ndrc.gov.cn"              # 国家发改委
+  - "miit.gov.cn"              # 工信部
+  - "samr.gov.cn"              # 市场监管总局
+  - "mof.gov.cn"               # 财政部
+  - "csrc.gov.cn"              # 证监会
+  - "pbc.gov.cn"               # 人民银行
+  - "customs.gov.cn"           # 海关总署
+  - "safe.gov.cn"              # 外汇管理局
+  - "cac.gov.cn"               # 网信办
+  - "cnnic.cn"                 # 中国互联网络信息中心
+  - "nhc.gov.cn"               # 国家卫健委
+  - "mee.gov.cn"               # 生态环境部
+  - "mot.gov.cn"               # 交通运输部
+  - "nmpa.gov.cn"              # 国家药监局
+
+  # ─── 美国政府 ───
+  - ".gov"                     # 美国政府通用
+  - "nist.gov"                 # 美国国家标准技术研究院
+  - "nih.gov"                  # 美国国立卫生研究院
+  - "fda.gov"                  # 美国食品药品监管局
+  - "epa.gov"                  # 美国环保署
+  - "energy.gov"               # 美国能源部
+  - "bls.gov"                  # 美国劳工统计局
+  - "census.gov"               # 美国人口普查局
+  - "sec.gov"                  # 美国证券交易委员会
+  - "federalreserve.gov"       # 美联储
+
+  # ─── 英国政府 ───
+  - ".gov.uk"                  # 英国政府通用
+  - "ons.gov.uk"               # 英国国家统计局
+  - "bankofengland.co.uk"      # 英格兰银行
+
+  # ─── 日本政府 ───
+  - ".go.jp"                   # 日本政府通用
+  - "stat.go.jp"               # 日本总务省统计局
+  - "meti.go.jp"               # 日本经产省
+  - "boj.or.jp"                # 日本银行
+  - "fsa.go.jp"                # 日本金融厅
+
+  # ─── 韩国政府 ───
+  - ".go.kr"                   # 韩国政府通用
+  - "kostat.go.kr"             # 韩国统计厅
+  - "bok.or.kr"                # 韩国银行
+
+  # ─── 德国/DACH政府 ───
+  - "destatis.de"              # 德国联邦统计局
+  - "bundesbank.de"            # 德意志联邦银行
+  - "bmwk.de"                  # 德国联邦经济部
+  - "admin.ch"                 # 瑞士联邦政府
+
+  # ─── 法国政府 ───
+  - ".gouv.fr"                 # 法国政府通用
+  - "insee.fr"                 # 法国国家统计局
+  - "banque-france.fr"         # 法国银行
+
+  # ─── 印度政府 ───
+  - ".gov.in"                  # 印度政府通用
+  - "rbi.org.in"               # 印度储备银行
+  - "mospi.gov.in"             # 印度统计部
+
+  # ─── 巴西政府 ───
+  - ".gov.br"                  # 巴西政府通用
+  - "ibge.gov.br"              # 巴西统计局
+  - "bcb.gov.br"               # 巴西央行
+
+  # ─── 澳大利亚政府 ───
+  - ".gov.au"                  # 澳大利亚政府通用
+  - "abs.gov.au"               # 澳大利亚统计局
+  - "rba.gov.au"               # 澳大利亚央行
+
+  # ─── 东南亚政府 ───
+  - ".gov.sg"                  # 新加坡政府
+  - "mas.gov.sg"               # 新加坡金管局
+  - ".go.id"                   # 印尼政府
+  - "bi.go.id"                 # 印尼央行
+  - ".go.th"                   # 泰国政府
+  - ".gov.my"                  # 马来西亚政府
+  - ".gov.ph"                  # 菲律宾政府
+  - ".gov.vn"                  # 越南政府
+
+  # ─── 中东政府 ───
+  - ".gov.sa"                  # 沙特政府
+  - ".gov.ae"                  # 阿联酋政府
+  - ".gov.qa"                  # 卡塔尔政府
+
+  # ─── 俄罗斯政府 ───
+  - ".gov.ru"                  # 俄罗斯政府通用
+  - "gks.ru"                   # 俄罗斯统计局
+  - "cbr.ru"                   # 俄罗斯央行
+
+  # ─── 学术机构（全球） ───
+  - ".edu"                     # 美国高校
+  - ".edu.cn"                  # 中国高校
+  - ".ac.uk"                   # 英国学术
+  - ".ac.cn"                   # 中国科学院
+  - ".ac.jp"                   # 日本学术
+  - ".ac.kr"                   # 韩国学术
+  - ".edu.au"                  # 澳大利亚高校
+  - ".edu.sg"                  # 新加坡高校
+  - ".edu.in"                  # 印度高校
+
+  # ─── 顶级学术期刊与平台 ───
+  - "nature.com"
+  - "science.org"
+  - "sciencedirect.com"
+  - "springer.com"
+  - "wiley.com"
+  - "thelancet.com"
+  - "nejm.org"
+  - "cell.com"
+  - "pnas.org"
+  - "pubmed.ncbi.nlm.nih.gov"
+  - "arxiv.org"
+  - "scholar.google"
+  - "jstor.org"
+  - "ieee.org"
+  - "acm.org"
+  - "ssrn.com"
+  - "researchgate.net"
+  - "cnki.net"                 # 中国知网
+  - "wanfangdata.com.cn"       # 万方数据
+  - "cqvip.com"                # 维普
+  - "jstage.jst.go.jp"         # 日本科技文献平台
+  - "kci.go.kr"                # 韩国学术引文索引
+
+  # ─── 标准组织 ───
+  - "iso.org"
+  - "ietf.org"
+  - "w3.org"
+  - "3gpp.org"
+
+  # ─── 上市公司监管披露 ───
+  - "hkexnews.hk"              # 港交所披露易
+  - "sse.com.cn"               # 上交所
+  - "szse.cn"                  # 深交所
+  - "cninfo.com.cn"            # 巨潮资讯
+  - "edinet.go.jp"             # 日本 EDINET（企业财务披露）
+  - "dart.fss.or.kr"           # 韩国 DART（企业披露系统）
+  - "tse.ir"                   # 德黑兰证交所
+
+
+# ===========================================================================
+# TIER 2 — 专业信源（weight: 0.8）
+# 顶级咨询、行业研究、智库、证券研究、专业财经媒体
+# ===========================================================================
+tier_2_professional:
+
+  # ─── 全球顶级咨询公司 ───
+  - "mckinsey.com"
+  - "bcg.com"
+  - "bain.com"
+  - "deloitte.com"
+  - "pwc.com"
+  - "ey.com"
+  - "kpmg.com"
+  - "accenture.com"
+  - "oliverwyman.com"
+  - "rolandberger.com"
+  - "atkearney.com"
+  - "strategyand.pwc.com"
+  - "lelo.com"
+
+  # ─── 全球行业研究机构 ───
+  - "gartner.com"
+  - "forrester.com"
+  - "idc.com"
+  - "statista.com"
+  - "euromonitor.com"
+  - "frost.com"
+  - "grandviewresearch.com"
+  - "marketsandmarkets.com"
+  - "emarketer.com"
+  - "insiderintelligence.com"
+  - "cbinsights.com"
+  - "pitchbook.com"
+  - "crunchbase.com"
+  - "mordorintelligence.com"
+  - "precedenceresearch.com"
+  - "fortunebusinessinsights.com"
+  - "alliedmarketresearch.com"
+  - "transparencymarketresearch.com"
+  - "ihsmarkit.com"
+  - "spglobal.com"             # S&P Global
+  - "moodys.com"               # 穆迪
+  - "fitchratings.com"         # 惠誉
+
+  # ─── 中国行业研究机构 ───
+  - "iresearch.cn"             # 艾瑞咨询
+  - "iresearchchina.com"
+  - "analysys.cn"              # 易观分析
+  - "questmobile.com.cn"       # QuestMobile
+  - "askci.com"                # 中商产业研究院
+  - "qianzhan.com"             # 前瞻产业研究院
+  - "chyxx.com"                # 智研咨询
+  - "mob.com"                  # MobTech
+  - "trustdata.cn"             # Trustdata
+  - "cic.cn"                   # 灼识咨询（CIC）
+
+  # ─── 日本行业研究 ───
+  - "yano.co.jp"               # 矢野经济研究所
+  - "nri.com"                  # 野村综合研究所
+  - "mri.co.jp"                # 三菱综合研究所
+  - "mizuho-ri.co.jp"          # 瑞穗综合研究所
+  - "jri.co.jp"                # 日本综合研究所
+  - "teikoku.com"              # 帝国数据库
+
+  # ─── 韩国行业研究 ───
+  - "kiet.re.kr"               # 韩国产业经济与贸易研究院
+  - "kdi.re.kr"                # 韩国开发研究院
+  - "kiep.go.kr"               # 韩国对外经济政策研究院
+  - "kisdi.re.kr"              # 韩国信息社会振兴院
+
+  # ─── 印度行业研究 ───
+  - "nasscom.in"               # 印度 NASSCOM
+  - "ibef.org"                 # 印度品牌基金会
+  - "ficci.in"                 # 印度工商联
+  - "cii.in"                   # 印度工业联合会
+
+  # ─── 东南亚行业研究 ───
+  - "temasek.com.sg"           # 淡马锡
+  - "aseanstats.org"           # 东盟统计
+  - "bain.com/insights/southeast-asia"
+
+  # ─── 全球智库 ───
+  - "rand.org"
+  - "brookings.edu"
+  - "cfr.org"
+  - "piie.com"
+  - "chathamhouse.org"
+  - "csis.org"
+  - "carnegieendowment.org"
+  - "heritage.org"
+  - "iiss.org"                 # 国际战略研究所
+  - "sipri.org"                # 斯德哥尔摩和平研究所
+  - "bruegel.org"              # 欧洲智库
+  - "diw.de"                   # 德国经济研究所
+  - "ifri.org"                 # 法国国际关系研究所
+  - "rieti.go.jp"              # 日本经济产业研究所
+
+  # ─── 中国智库/研究机构 ───
+  - "drc.gov.cn"               # 国务院发展研究中心
+  - "cass.cn"                  # 中国社科院
+  - "ccg.org.cn"               # 全球化智库
+  - "cciee.org.cn"             # 中国国际经济交流中心
+
+  # ─── 全球证券/金融研究 ───
+  - "goldmansachs.com"
+  - "jpmorgan.com"
+  - "morganstanley.com"
+  - "ubs.com"
+  - "credit-suisse.com"
+  - "nomura.com"               # 野村证券
+  - "daiwa-grp.jp"             # 大和证券
+
+  # ─── 中国证券/金融研究 ───
+  - "cicc.com"                 # 中金公司
+  - "research.cicc.com"
+  - "csc.com.cn"               # 中信证券
+  - "gtja.com"                 # 国泰君安
+  - "swsresearch.com"          # 申万宏源
+  - "eastmoney.com"            # 东方财富
+  - "wind.com.cn"              # 万得数据
+
+  # ─── 顶级商业/金融媒体（全球） ───
+  - "hbr.org"                  # 哈佛商业评论
+  - "mitsloan.mit.edu"
+  - "economist.com"
+  - "ft.com"
+  - "wsj.com"
+  - "bloomberg.com"
+  - "barrons.com"
+  - "fortune.com"
+  - "forbes.com"
+
+  # ─── 中国财经专业媒体 ───
+  - "caixin.com"               # 财新
+  - "yicai.com"                # 第一财经
+  - "stcn.com"                 # 证券时报
+  - "cs.com.cn"                # 中国证券报
+  - "nbd.com.cn"               # 每日经济新闻
+  - "cls.cn"                   # 财联社
+
+  # ─── 日本财经专业媒体 ───
+  - "nikkei.com"               # 日经新闻
+  - "toyokeizai.net"           # 东洋经济
+  - "diamond.jp"               # 钻石周刊
+
+  # ─── 韩国财经专业媒体 ───
+  - "mk.co.kr"                 # 每日经济
+  - "hankyung.com"             # 韩国经济
+  - "sedaily.com"              # 首尔经济
+
+  # ─── 德语财经媒体 ───
+  - "handelsblatt.com"         # 德国商报
+  - "manager-magazin.de"       # 经理人杂志
+  - "wiwo.de"                  # 经济周刊
+  - "nzz.ch"                   # 新苏黎世报
+
+  # ─── 法语财经媒体 ───
+  - "lesechos.fr"              # 法国回声报
+  - "latribune.fr"             # 法国论坛报
+
+  # ─── 印度财经媒体 ───
+  - "livemint.com"             # Livemint
+  - "economictimes.indiatimes.com"  # 经济时报
+  - "moneycontrol.com"
+
+
+# ===========================================================================
+# TIER 3 — 主流新闻信源（weight: 0.6）
+# 主流通讯社、大型新闻网、知名科技/商业媒体
+# ===========================================================================
+tier_3_news:
+
+  # ─── 全球通讯社 ───
+  - "reuters.com"
+  - "apnews.com"
+  - "afp.com"
+
+  # ─── 英语主流新闻 ───
+  - "bbc.com"
+  - "bbc.co.uk"
+  - "cnn.com"
+  - "nytimes.com"
+  - "washingtonpost.com"
+  - "theguardian.com"
+  - "abcnews.go.com"
+  - "nbcnews.com"
+  - "time.com"
+  - "usatoday.com"
+  - "theatlantic.com"
+  - "newyorker.com"
+
+  # ─── 英语科技媒体 ───
+  - "techcrunch.com"
+  - "wired.com"
+  - "theverge.com"
+  - "arstechnica.com"
+  - "zdnet.com"
+  - "venturebeat.com"
+  - "technologyreview.com"
+  - "engadget.com"
+  - "9to5mac.com"
+  - "tomsguide.com"
+  - "theinformation.com"
+  - "semafor.com"
+
+  # ─── 中国主流新闻 ───
+  - "xinhuanet.com"            # 新华网
+  - "people.com.cn"            # 人民网
+  - "chinadaily.com.cn"        # 中国日报
+  - "cctv.com"                 # 央视网
+  - "thepaper.cn"              # 澎湃新闻
+  - "bjnews.com.cn"            # 新京报
+  - "infzm.com"                # 南方周末
+  - "jiemian.com"              # 界面新闻
+  - "guancha.cn"               # 观察者网
+  - "china.com.cn"             # 中国网
+
+  # ─── 中国科技/商业媒体 ───
+  - "36kr.com"
+  - "huxiu.com"                # 虎嗅
+  - "tmtpost.com"              # 钛媒体
+  - "geekpark.net"             # 极客公园
+  - "leiphone.com"             # 雷锋网
+  - "jiqizhixin.com"           # 机器之心
+  - "ifanr.com"                # 爱范儿
+  - "latepost.com"             # 晚点LatePost
+  - "iyiou.com"                # 亿欧
+
+  # ─── 日本主流新闻/科技 ───
+  - "nhk.or.jp"                # NHK
+  - "asahi.com"                # 朝日新闻
+  - "mainichi.jp"              # 每日新闻
+  - "yomiuri.co.jp"            # 读卖新闻
+  - "japantimes.co.jp"         # 日本时报
+  - "itmedia.co.jp"            # ITmedia
+  - "impress.co.jp"            # Impress
+
+  # ─── 韩国主流新闻/科技 ───
+  - "chosun.com"               # 朝鲜日报
+  - "joins.com"                # 中央日报
+  - "donga.com"                # 东亚日报
+  - "koreaherald.com"          # 韩国先驱报
+  - "etnews.com"               # 电子新闻
+  - "zdnet.co.kr"              # ZDNet Korea
+
+  # ─── 德语主流新闻 ───
+  - "spiegel.de"               # 明镜周刊
+  - "zeit.de"                  # 时代周报
+  - "sueddeutsche.de"          # 南德意志报
+  - "faz.net"                  # 法兰克福汇报
+  - "heise.de"                 # Heise（科技）
+  - "golem.de"                 # Golem（科技）
+  - "orf.at"                   # 奥地利广播
+
+  # ─── 法语主流新闻 ───
+  - "lemonde.fr"               # 世界报
+  - "lefigaro.fr"              # 费加罗报
+  - "france24.com"
+  - "rfi.fr"                   # 法国国际广播
+
+  # ─── 西班牙语新闻 ───
+  - "elpais.com"               # 国家报（西班牙）
+  - "elmundo.es"               # 世界报
+  - "clarin.com"               # 号角报（阿根廷）
+  - "eluniversal.com.mx"       # 环球报（墨西哥）
+  - "expansion.com"            # 扩展报（商业）
+
+  # ─── 葡萄牙语新闻（巴西） ───
+  - "folha.uol.com.br"         # 圣保罗页报
+  - "estadao.com.br"           # 圣保罗州报
+  - "valoreconomico.com.br"    # 经济价值报
+  - "globo.com"                # 环球网
+
+  # ─── 阿拉伯语新闻 ───
+  - "aljazeera.com"            # 半岛电视台
+  - "aljazeera.net"
+  - "alarabiya.net"            # 阿拉比亚
+  - "arabnews.com"             # 阿拉伯新闻
+
+  # ─── 俄语新闻 ───
+  - "rbc.ru"                   # RBC
+  - "kommersant.ru"            # 商人日报
+  - "vedomosti.ru"             # 公报
+  - "tass.com"                 # 塔斯社
+
+  # ─── 印度新闻 ───
+  - "ndtv.com"
+  - "thehindu.com"
+  - "hindustantimes.com"
+  - "indiatoday.in"
+  - "yourstory.com"            # 创业媒体
+
+  # ─── 东南亚新闻 ───
+  - "straitstimes.com"         # 海峡时报（新加坡）
+  - "channelnewsasia.com"      # CNA
+  - "bangkokpost.com"          # 曼谷邮报
+  - "thestar.com.my"           # 星报（马来西亚）
+  - "inquirer.net"             # 菲律宾问询报
+  - "vnexpress.net"            # VnExpress（越南）
+  - "kompas.com"               # Kompas（印尼）
+  - "detik.com"                # Detik（印尼）
+  - "e27.co"                   # e27（东南亚科技）
+  - "techinasia.com"           # Tech in Asia
+  - "kr-asia.com"              # KrASIA
+
+  # ─── 中国综合门户财经频道 ───
+  - "finance.sina.com.cn"
+  - "finance.qq.com"
+  - "163.com"
+  - "sohu.com"
+
+
+# ===========================================================================
+# TIER 5 — 社交/自媒体信源（weight: 0.15）
+# 社交平台、论坛、自媒体、UGC 内容
+# ===========================================================================
+tier_5_social:
+
+  # ─── 全球社交平台 ───
+  - "twitter.com"
+  - "x.com"
+  - "facebook.com"
+  - "instagram.com"
+  - "tiktok.com"
+  - "reddit.com"
+  - "quora.com"
+  - "linkedin.com"
+  - "threads.net"
+  - "mastodon.social"
+  - "medium.com"
+  - "substack.com"
+
+  # ─── 中国社交/自媒体 ───
+  - "weibo.com"
+  - "mp.weixin.qq.com"         # 微信公众号
+  - "zhihu.com"
+  - "bilibili.com"
+  - "douyin.com"
+  - "xiaohongshu.com"
+  - "toutiao.com"
+  - "baijia.baidu.com"
+  - "tieba.baidu.com"
+  - "douban.com"
+
+  # ─── 日韩社交 ───
+  - "line.me"
+  - "ameblo.jp"                # Ameba 博客
+  - "note.com"                 # note（日本）
+  - "naver.com"                # Naver 博客/Cafe
+  - "daum.net"
+
+  # ─── 其他地区社交 ───
+  - "vk.com"                   # VK（俄罗斯）
+  - "ok.ru"                    # Odnoklassniki
+  - "telegram.org"
+
+  # ─── 开发者/极客社区 ───
+  - "v2ex.com"
+  - "sspai.com"
+  - "hackernews.com"
+  - "producthunt.com"
+  - "dev.to"
+  - "stackoverflow.com"
+  - "github.com"
+
+  # ─── 百科类 ───
+  - "wikipedia.org"
+  - "baike.baidu.com"
